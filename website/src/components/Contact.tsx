@@ -1,5 +1,6 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef, useState } from 'react'
+import { CONTACT_EMAIL } from '../site'
 
 export function Contact() {
   const ref = useRef(null)
@@ -33,10 +34,10 @@ export function Contact() {
                 Ответ за один рабочий день. Без рассылок и «прогрева».
               </p>
               <a
-                href="mailto:hello@flapp.dev"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="mt-10 inline-flex items-center gap-3 border-2 border-base bg-base px-6 py-3 font-mono text-sm font-semibold uppercase tracking-wider text-lime transition hover:bg-base-lift active:scale-[0.98]"
               >
-                hello@flapp.dev
+                {CONTACT_EMAIL}
               </a>
             </div>
 

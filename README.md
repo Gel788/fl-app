@@ -28,3 +28,9 @@ npm run build
 3. Если в настройках проекта задашь **Root Directory = `website`**, тогда Output = `dist`, а корневой `vercel.json` с `outputDirectory` может конфликтовать — в этом случае удали или поправь `outputDirectory` в панели на **dist**.
 
 После изменений сделай **Redeploy**.
+
+## Домен fl-app.ru
+
+Продакшен-URL и почта заданы в `website/src/site.ts` и в мета-тегах `website/index.html`.
+
+На Vercel: **Settings → Domains** → добавь `fl-app.ru` и `www.fl-app.ru`. У регистратора домена укажи DNS, которые покажет Vercel (обычно A `76.76.21.21` для apex или CNAME на `cname.vercel-dns.com` для поддомена). После проверки включи принудительный **HTTPS**.

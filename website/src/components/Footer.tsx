@@ -1,3 +1,5 @@
+import { CONTACT_EMAIL, SITE_HOST, SITE_URL } from '../site'
+
 export function Footer() {
   return (
     <footer className="border-t border-base-line bg-base">
@@ -37,10 +39,16 @@ export function Footer() {
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-sand-dim">Связь</p>
             <a
-              href="mailto:hello@flapp.dev"
-              className="mt-4 block font-mono text-sm text-sand transition hover:text-lime"
+              href={SITE_URL}
+              className="mt-4 block font-mono text-sm text-lime/90 transition hover:text-lime"
             >
-              hello@flapp.dev
+              {SITE_HOST}
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-2 block font-mono text-sm text-sand transition hover:text-lime"
+            >
+              {CONTACT_EMAIL}
             </a>
             <p className="mt-4 text-sm text-sand-muted">Удалённо · по всему миру</p>
           </div>
