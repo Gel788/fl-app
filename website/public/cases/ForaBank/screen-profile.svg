@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" fill="none">
+  <rect width="800" height="520" rx="24" fill="#141210" stroke="#2a2622"/>
+  <circle cx="120" cy="140" r="48" fill="#12100e" stroke="#dfff1c" stroke-opacity="0.4"/>
+  <text x="200" y="130" fill="#e8e4dc" font-family="system-ui" font-size="26" font-weight="700">@>D8;L</text>
+  <text x="200" y="162" fill="#9c9690" font-family="ui-monospace, monospace" font-size="12">57>?0A=>ABL · #AB@>9AB20</text>
+  <rect x="40" y="220" width="720" height="56" rx="14" fill="#12100e" stroke="#2a2622"/>
+  <rect x="40" y="296" width="720" height="56" rx="14" fill="#12100e" stroke="#2a2622"/>
+  <rect x="40" y="372" width="720" height="56" rx="14" fill="#12100e" stroke="#2a2622"/>
+</svg>

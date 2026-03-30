@@ -1,0 +1,87 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient backgrounds -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a4d68"/>
+      <stop offset="50%" stop-color="#00a8cc"/>
+      <stop offset="100%" stop-color="#0a4d68"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00a8cc" stop-opacity="0.4"/>
+    </linearGradient>
+    <!-- Shadows -->
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGrad)"/>
+  
+  <!-- Waves pattern -->
+  <path d="M0,400 Q200,380 400,400 T800,400 T1200,400 L1200,675 L0,675 Z" fill="url(#waveGrad)" opacity="0.6"/>
+  <path d="M0,450 Q300,420 600,450 T1200,450 L1200,675 L0,675 Z" fill="url(#waveGrad)" opacity="0.4"/>
+  <path d="M0,500 Q250,480 500,500 T1000,500 T1200,500 L1200,675 L0,675 Z" fill="url(#waveGrad)" opacity="0.3"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="200" cy="150" r="80" fill="#00d4ff" opacity="0.15"/>
+  <circle cx="1000" cy="200" r="120" fill="#00a8cc" opacity="0.1"/>
+  <circle cx="950" cy="500" r="100" fill="#00d4ff" opacity="0.12"/>
+  
+  <!-- Main content area (mockup frame) -->
+  <rect x="150" y="80" width="900" height="515" rx="16" fill="#1a2a35" opacity="0.9"/>
+  <rect x="170" y="100" width="860" height="475" rx="12" fill="#ffffff"/>
+  
+  <!-- Browser header -->
+  <rect x="170" y="100" width="860" height="50" rx="12" rx2="0" fill="#f5f5f5"/>
+  <circle cx="190" cy="125" r="8" fill="#ff5f57"/>
+  <circle cx="215" cy="125" r="8" fill="#ffbd2e"/>
+  <circle cx="240" cy="125" r="8" fill="#28ca42"/>
+  <rect x="270" y="115" width="200" height="20" rx="4" fill="#e0e0e0"/>
+  
+  <!-- Mockup content -->
+  <!-- Header section -->
+  <rect x="190" y="170" width="820" height="80" rx="8" fill="#0a4d68" opacity="0.1"/>
+  <rect x="210" y="185" width="200" height="20" rx="4" fill="#0a4d68" opacity="0.3"/>
+  <rect x="210" y="215" width="150" height="15" rx="4" fill="#0a4d68" opacity="0.2"/>
+  <rect x="750" y="190" width="100" height="40" rx="20" fill="#00a8cc"/>
+  <rect x="870" y="190" width="100" height="40" rx="20" fill="#00d4ff"/>
+  
+  <!-- Card grid -->
+  <!-- Card 1 -->
+  <rect x="190" y="280" width="260" height="280" rx="12" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="210" y="300" width="220" height="140" rx="8" fill="#0a4d68" opacity="0.2"/>
+  <rect x="210" y="450" width="180" height="16" rx="4" fill="#333" opacity="0.6"/>
+  <rect x="210" y="475" width="140" height="16" rx="4" fill="#666" opacity="0.4"/>
+  <rect x="210" y="500" width="100" height="12" rx="4" fill="#999" opacity="0.3"/>
+  <rect x="210" y="520" width="120" height="32" rx="16" fill="#00a8cc"/>
+  
+  <!-- Card 2 -->
+  <rect x="470" y="280" width="260" height="280" rx="12" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="490" y="300" width="220" height="140" rx="8" fill="#00a8cc" opacity="0.2"/>
+  <rect x="490" y="450" width="180" height="16" rx="4" fill="#333" opacity="0.6"/>
+  <rect x="490" y="475" width="140" height="16" rx="4" fill="#666" opacity="0.4"/>
+  <rect x="490" y="500" width="100" height="12" rx="4" fill="#999" opacity="0.3"/>
+  <rect x="490" y="520" width="120" height="32" rx="16" fill="#00d4ff"/>
+  
+  <!-- Card 3 -->
+  <rect x="750" y="280" width="260" height="280" rx="12" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="770" y="300" width="220" height="140" rx="8" fill="#00d4ff" opacity="0.2"/>
+  <rect x="770" y="450" width="180" height="16" rx="4" fill="#333" opacity="0.6"/>
+  <rect x="770" y="475" width="140" height="16" rx="4" fill="#666" opacity="0.4"/>
+  <rect x="770" y="500" width="100" height="12" rx="4" fill="#999" opacity="0.3"/>
+  <rect x="770" y="520" width="120" height="32" rx="16" fill="#0a4d68"/>
+  
+  <!-- Logo/Brand -->
+  <text x="600" y="60" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#shadow)">🌊 Продаю море</text>
+  <text x="600" y="35" font-family="Arial, sans-serif" font-size="18" fill="#b0e0ff" text-anchor="middle" opacity="0.9">Travel Booking Platform</text>
+</svg>

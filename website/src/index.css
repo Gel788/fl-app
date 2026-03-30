@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-base text-sand antialiased;
+    font-feature-settings: 'ss01' on;
+  }
+
+  ::selection {
+    @apply bg-lime/90 text-base;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply rounded-sm outline outline-2 outline-offset-[6px] outline-lime/70;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply rounded-sm outline outline-2 outline-offset-2 outline-lime/60;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .noise-overlay {
+    @apply pointer-events-none fixed inset-0 z-[100] opacity-[0.035];
+    background-image: theme('backgroundImage.noise');
+    background-size: 128px 128px;
+    mix-blend-mode: overlay;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-lime bg-lime px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest text-base transition-colors duration-200 hover:bg-lime-glow active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center border border-base-line px-8 py-4 font-mono text-sm uppercase tracking-widest text-sand transition-colors duration-200 hover:border-lime/50 hover:text-lime active:scale-[0.98];
+  }
+  .field-underline {
+    @apply w-full border-b border-base-line bg-transparent py-3 font-sans text-sand transition-colors duration-200 placeholder:text-sand-dim/45 focus:border-lime focus:outline-none;
+  }
+  .field-box {
+    @apply w-full resize-none border border-base-line bg-base-lift px-4 py-3 font-sans text-sm text-sand transition-colors duration-200 placeholder:text-sand-dim/45 focus:border-lime focus:outline-none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .noise-overlay {
+    opacity: 0.02;
+  }
+}
+
+/* Тонкий скроллбар под тёмную тему */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.base.line') theme('colors.base.DEFAULT');
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: theme('colors.base.DEFAULT');
+}
+*::-webkit-scrollbar-thumb {
+  background: theme('colors.base.line');
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.sand.dim');
+}
