@@ -1,0 +1,10 @@
+# https://fl-app.ru
+User-agent: *
+Allow: /
+
+# Яндекс
+User-agent: Yandex
+Allow: /
+
+Sitemap: https://fl-app.ru/sitemap.xml
+Host: https://fl-app.ru
