@@ -18,7 +18,8 @@ function CaseCard({
   onOpenDetail: (c: CaseStudy) => void
 }) {
   return (
-    <motion.article
+    <motion.button
+      type="button"
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: reduce ? 0 : 0.04 * index, duration: reduce ? 0.01 : 0.45 }}
@@ -30,14 +31,11 @@ function CaseCard({
               transition: { type: 'spring', stiffness: 380, damping: 26 },
             }
       }
-      className="group flex flex-col overflow-hidden border border-base-line bg-base transition-colors duration-300 hover:border-lime/40 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.75),inset_0_0_0_1px_rgba(223,255,28,0.1)]"
+      onClick={() => onOpenDetail(c)}
+      aria-label={`Подробнее: ${c.title}`}
+      className="group flex w-full flex-col overflow-hidden border border-base-line bg-base p-0 text-left transition-colors duration-300 hover:border-lime/40 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.75),inset_0_0_0_1px_rgba(223,255,28,0.1)]"
     >
-      <button
-        type="button"
-        className="relative aspect-[16/10] w-full overflow-hidden bg-base-lift text-left outline-none"
-        onClick={() => onOpenDetail(c)}
-        aria-label={`Подробнее: ${c.title}`}
-      >
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-base-lift">
         <img
           src={assetUrl(c.cover)}
           alt=""
@@ -55,45 +53,38 @@ function CaseCard({
           <img
             src={assetUrl(c.logo)}
             alt=""
-            className="absolute left-4 top-4 h-8 max-w-[140px] object-contain object-left drop-shadow-md sm:h-9"
+            className="pointer-events-none absolute left-4 top-4 h-8 max-w-[140px] object-contain object-left drop-shadow-md sm:h-9"
             loading="lazy"
           />
         )}
-        <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.3em] text-lime">
+        <span className="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.3em] text-lime">
           {c.tag}
         </span>
-      </button>
+      </div>
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <h3 className="font-display text-xl font-bold text-sand sm:text-2xl">{c.title}</h3>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-sand-muted">{c.desc}</p>
 
         {c.gallery.length > 0 && (
-          <div className="mt-5 flex gap-2 overflow-x-auto pb-1">
+          <div className="mt-5 flex gap-2 overflow-x-auto pb-1" aria-hidden>
             {c.gallery.slice(0, 4).map((thumb, i) => (
-              <button
+              <div
                 key={`${thumb}-${i}`}
-                type="button"
-                className="relative h-11 w-16 shrink-0 overflow-hidden border border-base-line bg-base-lift transition hover:border-lime/50"
-                onClick={() => onOpenDetail(c)}
-                aria-label={`${c.title}: превью ${i + 1}`}
+                className="relative h-11 w-16 shrink-0 overflow-hidden border border-base-line bg-base-lift transition group-hover:border-lime/40"
               >
                 <img src={assetUrl(thumb)} alt="" className="h-full w-full object-cover" loading="lazy" />
-              </button>
+              </div>
             ))}
           </div>
         )}
 
-        <button
-          type="button"
-          onClick={() => onOpenDetail(c)}
-          className="mt-6 inline-flex w-fit items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-sand-dim transition hover:text-lime"
-        >
+        <span className="mt-6 inline-flex w-fit items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-sand-dim group-hover:text-lime">
           Подробнее
           <span aria-hidden>↗</span>
-        </button>
+        </span>
       </div>
-    </motion.article>
+    </motion.button>
   )
 }
 
@@ -111,7 +102,8 @@ function FeaturedCase({
   onOpenDetail: (c: CaseStudy) => void
 }) {
   return (
-    <motion.article
+    <motion.button
+      type="button"
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: reduce ? 0 : 0.02 * index, duration: reduce ? 0.01 : 0.55 }}
@@ -123,15 +115,12 @@ function FeaturedCase({
               transition: { type: 'spring', stiffness: 360, damping: 28 },
             }
       }
-      className="group relative overflow-hidden border border-base-line bg-base transition-shadow duration-300 hover:border-lime/35 hover:shadow-[0_28px_70px_-32px_rgba(0,0,0,0.8)] md:col-span-2 xl:col-span-2"
+      onClick={() => onOpenDetail(c)}
+      aria-label={`Подробнее: ${c.title}`}
+      className="group relative w-full overflow-hidden border border-base-line bg-base p-0 text-left transition-shadow duration-300 hover:border-lime/35 hover:shadow-[0_28px_70px_-32px_rgba(0,0,0,0.8)] md:col-span-2 xl:col-span-2"
     >
       <div className="grid lg:grid-cols-12 lg:gap-0">
-        <button
-          type="button"
-          className="relative aspect-[16/11] overflow-hidden bg-base-lift text-left lg:col-span-7 lg:aspect-auto lg:min-h-[340px]"
-          onClick={() => onOpenDetail(c)}
-          aria-label={`Подробнее: ${c.title}`}
-        >
+        <div className="relative aspect-[16/11] overflow-hidden bg-base-lift lg:col-span-7 lg:aspect-auto lg:min-h-[340px]">
           <img
             src={assetUrl(c.cover)}
             alt=""
@@ -147,40 +136,33 @@ function FeaturedCase({
             <img
               src={assetUrl(c.logo)}
               alt=""
-              className="absolute left-6 top-6 h-10 max-w-[180px] object-contain object-left sm:h-11"
+              className="pointer-events-none absolute left-6 top-6 h-10 max-w-[180px] object-contain object-left sm:h-11"
             />
           )}
-        </button>
+        </div>
 
         <div className="flex flex-col justify-center border-t border-base-line p-8 sm:p-10 lg:col-span-5 lg:border-l lg:border-t-0 lg:border-base-line">
           <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-lime">{c.tag}</p>
           <h3 className="mt-4 font-display text-3xl font-bold leading-tight text-sand sm:text-4xl">{c.title}</h3>
           <p className="mt-4 text-base leading-relaxed text-sand-muted">{c.desc}</p>
 
-          <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-2" aria-hidden>
             {c.gallery.slice(0, 3).map((thumb, i) => (
-              <button
+              <div
                 key={`${thumb}-${i}`}
-                type="button"
-                onClick={() => onOpenDetail(c)}
-                className="relative h-14 w-24 overflow-hidden border border-base-line bg-base-lift transition hover:border-lime/50"
-                aria-label="Превью экрана"
+                className="relative h-14 w-24 overflow-hidden border border-base-line bg-base-lift transition group-hover:border-lime/50"
               >
                 <img src={assetUrl(thumb)} alt="" className="h-full w-full object-cover" loading="lazy" />
-              </button>
+              </div>
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() => onOpenDetail(c)}
-            className="mt-8 inline-flex w-fit items-center gap-3 border border-lime bg-lime px-6 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-base transition hover:bg-lime-glow"
-          >
+          <span className="mt-8 inline-flex w-fit items-center gap-3 border border-lime bg-lime px-6 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-base transition group-hover:bg-lime-glow">
             Детальный просмотр
-          </button>
+          </span>
         </div>
       </div>
-    </motion.article>
+    </motion.button>
   )
 }
 
