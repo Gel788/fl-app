@@ -1,7 +1,58 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { useEffect, useCallback, useMemo } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import type { CaseStudy } from '../data/cases'
 import { assetUrl } from '../lib/assetUrl'
+
+const LOAD_MS = 780
+
+function CaseLoadOverlay({
+  title,
+  progress,
+  line,
+  reduce,
+}: {
+  title: string
+  progress: number
+  line: string
+  reduce: boolean | null
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="absolute inset-0 z-[35] flex flex-col bg-base"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[length:32px_32px] bg-grid-fine opacity-25" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_30%,rgba(223,255,28,0.06),transparent_65%)]" />
+      <div className="relative flex flex-1 flex-col items-center justify-center px-8 py-12">
+        <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-sand-dim">case dossier</p>
+        <p className="mt-4 max-w-md text-center font-display text-xl font-bold text-sand sm:text-2xl">{title}</p>
+        <div className="mt-10 h-1 w-full max-w-sm overflow-hidden rounded-full bg-base-line">
+          <motion.div
+            className="h-full rounded-full bg-lime"
+            style={{
+              width: `${progress}%`,
+              boxShadow: '0 0 20px rgba(223,255,28,0.35)',
+            }}
+          />
+        </div>
+        <p className="mt-4 font-mono text-[10px] tracking-wide text-lime/90">{Math.round(progress)}%</p>
+        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.2em] text-sand-dim">{line}</p>
+        <div className="mt-10 flex gap-1">
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              className="h-1 w-1 rounded-full bg-lime"
+              animate={reduce ? { opacity: 0.7 } : { opacity: [0.2, 1, 0.2] }}
+              transition={reduce ? undefined : { duration: 0.9, repeat: Infinity, delay: i * 0.15 }}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 function uniqImages(c: CaseStudy): string[] {
   return [...new Set([c.cover, ...c.gallery].filter(Boolean))]
@@ -12,10 +63,42 @@ type Props = {
   onClose: () => void
 }
 
+const loadLines = [
+  'FETCH_METADATA …',
+  'DECODE_PREVIEW …',
+  'ASSEMBLE_VIEW …',
+  'READY',
+] as const
+
 export function CaseDetailModal({ caseStudy: c, onClose }: Props) {
   const reduce = useReducedMotion()
   const images = useMemo(() => uniqImages(c), [c])
   const d = c.detail
+  const [phase, setPhase] = useState<'loading' | 'ready'>(() => (reduce ? 'ready' : 'loading'))
+  const [progress, setProgress] = useState(0)
+  const [lineIdx, setLineIdx] = useState(0)
+
+  useEffect(() => {
+    if (reduce) {
+      setPhase('ready')
+      setProgress(100)
+      return
+    }
+    setPhase('loading')
+    setProgress(0)
+    setLineIdx(0)
+    const start = performance.now()
+    let raf: number
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / LOAD_MS)
+      setProgress(t * 100)
+      setLineIdx(Math.min(loadLines.length - 1, Math.floor(t * loadLines.length)))
+      if (t < 1) raf = requestAnimationFrame(tick)
+      else setPhase('ready')
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [c.id, reduce])
 
   const onKey = useCallback(
     (e: KeyboardEvent) => {
@@ -66,6 +149,30 @@ export function CaseDetailModal({ caseStudy: c, onClose }: Props) {
         className="relative flex max-h-[min(94dvh,920px)] w-full max-w-5xl flex-col overflow-hidden border border-base-line bg-base shadow-[0_0_0_1px_rgba(223,255,28,0.06),0_40px_100px_-24px_rgba(0,0,0,0.85)] sm:max-h-[min(92dvh,880px)] sm:rounded-sm"
         onClick={(e) => e.stopPropagation()}
       >
+        <AnimatePresence mode="wait">
+          {phase === 'loading' && (
+            <CaseLoadOverlay
+              key={`load-${c.id}`}
+              title={c.title}
+              progress={progress}
+              line={loadLines[lineIdx] ?? loadLines[0]}
+              reduce={reduce}
+            />
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          initial={false}
+          animate={{
+            opacity: phase === 'ready' ? 1 : 0,
+            filter:
+              reduce || phase === 'ready' ? 'blur(0px)' : 'blur(6px)',
+          }}
+          transition={{ duration: reduce ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className={`flex min-h-0 flex-1 flex-col ${phase === 'loading' ? 'pointer-events-none' : ''}`}
+          aria-hidden={phase === 'loading'}
+          aria-busy={phase === 'loading'}
+        >
         <header className="relative z-10 flex shrink-0 items-center justify-between gap-4 border-b border-base-line bg-base/95 px-4 py-4 backdrop-blur-sm sm:px-6">
           <div className="flex min-w-0 items-center gap-4">
             {c.logo && (
@@ -231,6 +338,7 @@ export function CaseDetailModal({ caseStudy: c, onClose }: Props) {
             </div>
           )}
         </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   )

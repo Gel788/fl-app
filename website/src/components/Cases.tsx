@@ -22,7 +22,15 @@ function CaseCard({
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: reduce ? 0 : 0.04 * index, duration: reduce ? 0.01 : 0.45 }}
-      className="group flex flex-col overflow-hidden border border-base-line bg-base transition hover:border-lime/35 hover:shadow-[inset_0_0_0_1px_rgba(223,255,28,0.08)]"
+      whileHover={
+        reduce
+          ? undefined
+          : {
+              y: -5,
+              transition: { type: 'spring', stiffness: 380, damping: 26 },
+            }
+      }
+      className="group flex flex-col overflow-hidden border border-base-line bg-base transition-colors duration-300 hover:border-lime/40 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.75),inset_0_0_0_1px_rgba(223,255,28,0.1)]"
     >
       <button
         type="button"
@@ -107,7 +115,15 @@ function FeaturedCase({
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: reduce ? 0 : 0.02 * index, duration: reduce ? 0.01 : 0.55 }}
-      className="group relative overflow-hidden border border-base-line bg-base md:col-span-2 xl:col-span-2"
+      whileHover={
+        reduce
+          ? undefined
+          : {
+              y: -3,
+              transition: { type: 'spring', stiffness: 360, damping: 28 },
+            }
+      }
+      className="group relative overflow-hidden border border-base-line bg-base transition-shadow duration-300 hover:border-lime/35 hover:shadow-[0_28px_70px_-32px_rgba(0,0,0,0.8)] md:col-span-2 xl:col-span-2"
     >
       <div className="grid lg:grid-cols-12 lg:gap-0">
         <button
@@ -188,7 +204,13 @@ export function Cases() {
             transition={{ duration: reduce ? 0.01 : 0.45 }}
           >
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-lime">Кейсы</p>
-            <h2 className="mt-4 font-display text-display-lg font-bold text-sand">
+            <motion.div
+              className="mt-3 h-px max-w-[120px] origin-left bg-gradient-to-r from-lime/90 to-transparent"
+              initial={{ scaleX: 0 }}
+              animate={inView ? { scaleX: 1 } : {}}
+              transition={{ duration: reduce ? 0.01 : 0.75, ease: [0.22, 1, 0.36, 1] }}
+            />
+            <h2 className="mt-5 font-display text-display-lg font-bold text-sand">
               Реальные
               <br />
               <span className="text-sand-muted">продукты</span>
