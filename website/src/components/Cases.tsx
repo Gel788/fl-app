@@ -157,7 +157,7 @@ function FeaturedCase({
             ))}
           </div>
 
-          <span className="mt-8 inline-flex w-fit items-center gap-3 border border-lime bg-lime px-6 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-base transition group-hover:bg-lime-glow">
+          <span className="mt-8 inline-flex w-fit items-center gap-3 border border-lime bg-lime px-6 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-fg transition group-hover:bg-lime-glow">
             Детальный просмотр
           </span>
         </div>

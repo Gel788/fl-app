@@ -1,6 +1,7 @@
 import { LayoutGroup, motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { useScrollSpy, type ScrollSpySection } from '../hooks/useScrollSpy'
+import { ThemeToggle } from './ThemeToggle'
 
 const nav = [
   { href: '#services', label: 'Услуги', id: 'services' as const },
@@ -84,10 +85,11 @@ export function Header() {
           </nav>
         </LayoutGroup>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
           <a
             href="#contact"
-            className="hidden border border-lime bg-lime px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-base transition hover:bg-lime-glow active:scale-[0.98] sm:inline-flex"
+            className="hidden border border-lime bg-lime px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-fg transition hover:bg-lime-glow active:scale-[0.98] sm:inline-flex"
           >
             Бриф
           </a>
@@ -135,7 +137,7 @@ export function Header() {
             })}
             <a
               href="#contact"
-              className="mt-4 border border-lime bg-lime py-4 text-center font-mono text-sm font-medium uppercase tracking-widest text-base"
+              className="mt-4 border border-lime bg-lime py-4 text-center font-mono text-sm font-medium uppercase tracking-widest text-fg"
               onClick={() => setOpen(false)}
             >
               Бриф

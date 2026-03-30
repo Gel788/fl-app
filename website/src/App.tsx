@@ -7,6 +7,7 @@ import { Cases } from './components/Cases'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { ScrollProgress } from './components/ScrollProgress'
+import { ScrollSection } from './components/ScrollSection'
 import { SplashScreen } from './components/SplashScreen'
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
       <SplashScreen />
       <a
         href="#main"
-        className="fixed left-4 top-4 z-[200] -translate-y-16 border border-lime bg-lime px-4 py-2 font-mono text-xs font-medium uppercase tracking-wider text-base transition focus:translate-y-0 focus:outline-none"
+        className="fixed left-4 top-4 z-[200] -translate-y-16 border border-lime bg-lime px-4 py-2 font-mono text-xs font-medium uppercase tracking-wider text-fg transition focus:translate-y-0 focus:outline-none"
       >
         К контенту
       </a>
@@ -24,13 +25,25 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
-        <TechMarquee />
-        <Services />
-        <Process />
-        <Cases />
-        <Contact />
+        <ScrollSection>
+          <TechMarquee />
+        </ScrollSection>
+        <ScrollSection>
+          <Services />
+        </ScrollSection>
+        <ScrollSection>
+          <Process />
+        </ScrollSection>
+        <ScrollSection>
+          <Cases />
+        </ScrollSection>
+        <ScrollSection>
+          <Contact />
+        </ScrollSection>
       </main>
-      <Footer />
+      <ScrollSection className="block">
+        <Footer />
+      </ScrollSection>
     </div>
   )
 }

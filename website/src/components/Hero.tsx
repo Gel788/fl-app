@@ -222,7 +222,7 @@ export function Hero() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-36 bg-gradient-to-t from-[#0c0b09] via-[#0c0b09]/90 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-36 bg-gradient-to-t from-base via-base/90 to-transparent" />
               <div className="absolute bottom-16 left-0 right-0 z-[3] flex justify-center gap-1">
                 {slides.map((c, i) => (
                   <span

@@ -293,7 +293,7 @@ export function CaseDetailModal({ caseStudy: c, onClose }: Props) {
 
               <a
                 href="#contact"
-                className="mt-2 inline-flex w-full items-center justify-center border border-lime bg-lime py-3 font-mono text-xs font-semibold uppercase tracking-widest text-base transition hover:bg-lime-glow sm:w-auto sm:px-6"
+                className="mt-2 inline-flex w-full items-center justify-center border border-lime bg-lime py-3 font-mono text-xs font-semibold uppercase tracking-widest text-fg transition hover:bg-lime-glow sm:w-auto sm:px-6"
                 onClick={onClose}
               >
                 Похожий проект

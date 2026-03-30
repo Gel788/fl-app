@@ -24,13 +24,13 @@ export function Contact() {
         >
           <div className="grid lg:grid-cols-2">
             <div className="border-b border-base-line bg-lime p-10 sm:p-14 lg:border-b-0 lg:border-r">
-              <p className="font-mono text-xs font-medium uppercase tracking-[0.35em] text-base/70">Контакт</p>
-              <h2 className="mt-6 font-display text-3xl font-extrabold leading-[1.1] text-base sm:text-4xl md:text-5xl">
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.35em] text-fg/70">Контакт</p>
+              <h2 className="mt-6 font-display text-3xl font-extrabold leading-[1.1] text-fg sm:text-4xl md:text-5xl">
                 Расскажите,
                 <br />
                 что строите
               </h2>
-              <p className="mt-8 max-w-sm font-mono text-sm leading-relaxed text-base/75">
+              <p className="mt-8 max-w-sm font-mono text-sm leading-relaxed text-fg/75">
                 Ответ за один рабочий день. Без рассылок и «прогрева».
               </p>
               <a

@@ -3,6 +3,36 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-base-rgb: 12 11 9;
+    --color-base-lift-rgb: 18 16 14;
+    --color-base-card-rgb: 24 21 18;
+    --color-base-line-rgb: 42 38 34;
+    --color-sand-rgb: 232 228 220;
+    --color-sand-muted-rgb: 156 150 144;
+    --color-sand-dim-rgb: 92 88 84;
+    --color-lime-rgb: 223 255 28;
+    --color-lime-dim-rgb: 159 184 20;
+    --color-lime-glow-rgb: 244 255 122;
+    --color-fg-rgb: 12 11 9;
+    --grid-line-rgb: 232 228 220;
+  }
+
+  html.light {
+    --color-base-rgb: 244 241 234;
+    --color-base-lift-rgb: 235 230 220;
+    --color-base-card-rgb: 255 255 255;
+    --color-base-line-rgb: 212 207 196;
+    --color-sand-rgb: 20 18 16;
+    --color-sand-muted-rgb: 74 72 68;
+    --color-sand-dim-rgb: 108 104 96;
+    --color-lime-rgb: 196 217 0;
+    --color-lime-dim-rgb: 138 159 0;
+    --color-lime-glow-rgb: 223 255 28;
+    --color-fg-rgb: 12 11 9;
+    --grid-line-rgb: 20 18 16;
+  }
+
   html {
     scroll-padding-top: 6rem;
   }
@@ -16,10 +46,14 @@
   body {
     @apply bg-base text-sand antialiased;
     font-feature-settings: 'ss01' on;
+    transition:
+      background-color 0.35s ease,
+      color 0.35s ease;
   }
 
   ::selection {
-    @apply bg-lime/90 text-base;
+    color: rgb(var(--color-fg-rgb));
+    background: rgb(var(--color-lime-rgb) / 0.88);
   }
 
   :focus:not(:focus-visible) {
@@ -48,11 +82,15 @@
     background-size: 128px 128px;
     mix-blend-mode: overlay;
   }
+  html.light .noise-overlay {
+    @apply opacity-[0.045];
+    mix-blend-mode: multiply;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 border-2 border-lime bg-lime px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest text-base transition-colors duration-200 hover:bg-lime-glow active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 border-2 border-lime bg-lime px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest text-fg transition-colors duration-200 hover:bg-lime-glow active:scale-[0.98];
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center border border-base-line px-8 py-4 font-mono text-sm uppercase tracking-widest text-sand transition-colors duration-200 hover:border-lime/50 hover:text-lime active:scale-[0.98];
@@ -71,22 +109,21 @@
   }
 }
 
-/* Тонкий скроллбар под тёмную тему */
 * {
   scrollbar-width: thin;
-  scrollbar-color: theme('colors.base.line') theme('colors.base.DEFAULT');
+  scrollbar-color: rgb(var(--color-base-line-rgb)) rgb(var(--color-base-rgb));
 }
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 *::-webkit-scrollbar-track {
-  background: theme('colors.base.DEFAULT');
+  background: rgb(var(--color-base-rgb));
 }
 *::-webkit-scrollbar-thumb {
-  background: theme('colors.base.line');
+  background: rgb(var(--color-base-line-rgb));
   border-radius: 4px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.sand.dim');
+  background: rgb(var(--color-sand-dim-rgb));
 }
