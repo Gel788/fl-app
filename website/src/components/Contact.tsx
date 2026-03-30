@@ -17,9 +17,9 @@ export function Contact() {
     <section id="contact" ref={ref} className="relative scroll-mt-24 pb-24 sm:pb-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: reduce ? 0.01 : 0.5 }}
+          initial={{ opacity: 0, y: 28, scale: reduce ? 1 : 0.985 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: reduce ? 0.01 : 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="overflow-hidden border border-base-line bg-base-card shadow-[0_0_0_1px_rgba(42,38,34,0.5)]"
         >
           <div className="grid lg:grid-cols-2">

@@ -28,14 +28,27 @@ export function Process() {
 
         <div className="relative mb-14 hidden lg:block">
           <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-base-line" />
+          <motion.div
+            className="absolute left-0 top-1/2 h-[2px] w-full origin-left -translate-y-1/2 rounded-full bg-gradient-to-r from-lime via-lime/80 to-lime/30"
+            initial={{ scaleX: 0 }}
+            animate={inView ? { scaleX: 1 } : {}}
+            transition={{ duration: reduce ? 0.01 : 1.05, ease: [0.22, 1, 0.36, 1] }}
+          />
           <div className="relative flex justify-between">
-            {steps.map((step) => (
-              <div
+            {steps.map((step, i) => (
+              <motion.div
                 key={step.n}
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={inView ? { scale: 1, opacity: 1 } : {}}
+                transition={
+                  reduce
+                    ? { duration: 0.01 }
+                    : { delay: 0.08 * i, type: 'spring', stiffness: 400, damping: 22 }
+                }
                 className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-lime/50 bg-base font-mono text-xs font-medium text-lime shadow-[0_0_0_4px] shadow-base-lift"
               >
                 {step.n}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -47,6 +60,7 @@ export function Process() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: reduce ? 0 : 0.08 * i, duration: reduce ? 0.01 : 0.45 }}
+              whileHover={reduce ? undefined : { y: -2 }}
               className="group relative border-t border-base-line pt-10 transition-colors hover:bg-base/30 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 first:lg:border-l-0 first:lg:pl-0"
             >
               <div className="font-mono text-xs text-sand-dim lg:hidden">{step.n}</div>

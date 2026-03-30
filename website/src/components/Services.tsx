@@ -57,7 +57,14 @@ export function Services() {
             transition={{ duration: reduce ? 0.01 : 0.5 }}
             className="max-w-3xl"
           >
-            <p className="font-mono text-xs uppercase tracking-[0.35em] text-lime">Услуги</p>
+            <motion.p
+              className="font-mono text-xs uppercase tracking-[0.35em] text-lime"
+              initial={false}
+              animate={inView ? { opacity: [0.7, 1] } : {}}
+              transition={{ duration: reduce ? 0.01 : 0.6 }}
+            >
+              Услуги
+            </motion.p>
             <h2 className="mt-4 font-display text-display-lg font-bold text-sand">
               Всё, что нужно
               <br />
@@ -67,7 +74,7 @@ export function Services() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: reduce ? 0 : 0.1, duration: reduce ? 0.01 : 0.5 }}
+            transition={{ delay: reduce ? 0 : 0.12, duration: reduce ? 0.01 : 0.5 }}
             className="max-w-sm font-mono text-sm leading-relaxed text-sand-dim"
           >
             Собираем команду под задачу. Фикс‑прайс или тайм‑материал — прозрачно в договоре.
@@ -81,6 +88,14 @@ export function Services() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: delay(i), duration: dur }}
+              whileHover={
+                reduce
+                  ? undefined
+                  : {
+                      y: -4,
+                      transition: { type: 'spring', stiffness: 420, damping: 28 },
+                    }
+              }
               className={`group relative bg-base p-8 transition-[background-color,box-shadow] duration-300 hover:bg-base-lift hover:shadow-[inset_0_0_0_1px_rgba(223,255,28,0.12)] sm:min-h-[240px] ${item.span}`}
             >
               <span className="font-mono text-[10px] text-lime/80">{item.num}</span>

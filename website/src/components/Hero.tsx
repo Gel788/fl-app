@@ -40,7 +40,7 @@ export function Hero() {
   const fade = { duration: reduce ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] as const }
 
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden pt-24 sm:pt-28">
+    <section id="hero" className="relative min-h-[100dvh] overflow-hidden pt-24 sm:pt-28">
       <div
         className="pointer-events-none absolute inset-0 bg-[length:56px_56px] bg-grid-fine opacity-40"
         style={{ maskImage: 'linear-gradient(180deg, black 55%, transparent)' }}
